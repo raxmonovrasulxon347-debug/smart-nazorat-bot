@@ -163,14 +163,12 @@ async def change_location_start(message: types.Message, state: FSMContext):
 
 @admin_router.message(AdminStates.waiting_for_location)
 async def process_location(message: types.Message, state: FSMContext):
-    # Если локация отправлена через Telegram Location
     if message.location:
         lat = message.location.latitude
         lon = message.location.longitude
         await set_office_location(lat, lon)
         await state.clear()
         await message.answer(f"✅ Ishxona lokatsiyasi saqlandi!\nKoordinatalar: <code>{lat}, {lon}</code>", parse_mode="HTML")
-    # Если координаты отправлены текстом (например: 40.5286, 70.9425)
     elif message.text:
         try:
             coords = message.text.split(',')
