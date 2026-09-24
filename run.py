@@ -4,15 +4,15 @@ import threading
 import os
 from aiogram import Bot, Dispatcher
 from config import BOT_TOKEN
-from admin import router as admin_router
+from admin import admin_router
 from database import init_db
 
-# Render port talabini qondirish uchun mini HTTP server
+# Mini HTTP server для создания активного порта Render
 class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         self.send_response(200)
         self.end_headers()
-        self.wfile.write(b"Bot ishlamoqda...")
+        self.wfile.write(b"Bot status: OK")
 
 def run_http_server():
     port = int(os.environ.get("PORT", 8080))
@@ -29,7 +29,6 @@ async def main():
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
-    # Web serverni alohida thread'da yurgizish
     threading.Thread(target=run_http_server, daemon=True).start()
     
     try:
