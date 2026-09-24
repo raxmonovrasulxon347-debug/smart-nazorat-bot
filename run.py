@@ -4,10 +4,10 @@ import threading
 import os
 from aiogram import Bot, Dispatcher
 from config import BOT_TOKEN
-from admin import router as admin_router
+from admin import Router as admin_router  # router kichik 'r' o'rniga katta 'R' qilindi
 from database import init_db
 
-# Render portini aldash uchun mini HTTP server
+# Render portini qondirish uchun mini HTTP server
 class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         self.send_response(200)
@@ -29,7 +29,7 @@ async def main():
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
-    # Web serverni alohida ipda (thread) yurgizish
+    # Web serverni alohida thread'da yurgizish
     threading.Thread(target=run_http_server, daemon=True).start()
     
     try:
