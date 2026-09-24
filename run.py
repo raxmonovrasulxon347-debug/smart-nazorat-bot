@@ -4,10 +4,10 @@ import threading
 import os
 from aiogram import Bot, Dispatcher
 from config import BOT_TOKEN
-from admin import Router as admin_router  # router kichik 'r' o'rniga katta 'R' qilindi
+from admin import router as admin_router
 from database import init_db
 
-# Render portini qondirish uchun mini HTTP server
+# Render port talabini qondirish uchun mini HTTP server
 class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         self.send_response(200)
